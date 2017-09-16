@@ -6,41 +6,41 @@ class Note(object):
     happen outside of this class.
     """
 
-    ids_in_use = set()
+    _ids_in_use = set()
 
     def __init__(self, unique_id):
         self.unique_id = unique_id    #assumes presence of a unique id for every note
-        if unique_id in self.ids_in_use:
+        if unique_id in self._ids_in_use:
             print("WARNING: id already in use") #left as a warning for now, probably should involve more than this
-        self.ids_in_use.add(unique_id)
-        self._mentions = set()
-        self._topics = set()
-        self._reference = None
+        self._ids_in_use.add(unique_id)
+        self.mentions = set()
+        self.topics = set()
+        self.reference = None
         self.urls = set()
 
     def add_mentions(self, *items):
-        self._mentions.update(items)
+        self.mentions.update(items)
 
     def has_mention(self, item):
-        return item in self._mentions
+        return item in self.mentions
 
+    def mention_count(self):
+        return len(self.mentions)
+    
     def add_topics(self, *items):
-        self._topics.update(items)
+        self.topics.update(items)
 
     def has_topic(self, item):
-        return item in self._topics
+        return item in self.topics
 
     def create_reference(self, ref_id):
-        self._reference = ref_id
+        self.reference = ref_id
 
     def get_reference(self):
-        return self._reference
+        return self.reference
 
     def add_urls(self, *items):
         self.urls.update(items)
-
-    def get_urls(self):
-        return self.urls
 
     def __eq__(self, other):
         return self.unique_id == other.unique_id

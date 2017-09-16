@@ -10,6 +10,9 @@ class TestNote(unittest.TestCase):
         self.assertTrue(self.test_note.has_mention("mention test"))
         self.assertFalse(self.test_note.has_mention("should be false"))
 
+    def test_mention_count(self):
+        self.assertEqual(self.test_note.mention_count(), 2)
+
     def test_has_topic(self):
         self.test_note.add_topics("topic")
         self.assertTrue(self.test_note.has_topic("topic"))
@@ -20,9 +23,9 @@ class TestNote(unittest.TestCase):
         self.test_note.create_reference("abc")
         self.assertEqual(self.test_note.get_reference(), "abc")
 
-    def test_get_urls(self):
+    def test_urls(self):
         self.test_note.add_urls("luc.edu", "twitter.com")
-        self.assertEqual(self.test_note.get_urls(), set(["twitter.com", "luc.edu"]))
+        self.assertEqual(self.test_note.urls, set(["twitter.com", "luc.edu"]))
 
     def test_eq(self):
         self.second_test_note = Note("xyz")
