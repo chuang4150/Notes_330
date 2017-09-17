@@ -44,3 +44,9 @@ class Note(object):
 
     def __eq__(self, other):
         return self.unique_id == other.unique_id
+
+    def __str__(self):
+        return "Note " + self.unique_id
+
+    def __hash__(self):
+        return hash(str(self))
