@@ -17,3 +17,9 @@ class NoteGroup(object):
 
     def with_mentions(self):
         return list(filter(lambda x: x.mention_count() > 0, self.notes))
+
+    def with_mention(self, mention):
+        return list(filter(lambda x: x.has_mention(mention), self.notes))
+
+    def with_topic(self, topic):
+        return list(filter(lambda x: x.has_topic(topic), self.notes))
