@@ -17,6 +17,7 @@ class Note(object):
         self.topics = set()
         self.reference = None
         self.urls = set()
+        self.keywords = set()
 
     def add_mentions(self, *items):
         self.mentions.update(items)
@@ -41,6 +42,12 @@ class Note(object):
 
     def add_urls(self, *items):
         self.urls.update(items)
+
+    def add_keywords(self, *items):
+        self.keywords.update(items)
+
+    def has_keyword(self, item):
+        return item in self.keywords
 
     def __eq__(self, other):
         return self.unique_id == other.unique_id

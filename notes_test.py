@@ -27,6 +27,11 @@ class TestNote(unittest.TestCase):
         self.test_note.add_urls("luc.edu", "twitter.com")
         self.assertEqual(self.test_note.urls, set(["twitter.com", "luc.edu"]))
 
+    def test_keywords(self):
+        self.test_note.add_keywords("keyword", "kw")
+        self.assertTrue(self.test_note.has_keyword("keyword"))
+        self.assertFalse(self.test_note.has_keyword("false"))
+
     def test_eq(self):
         self.second_test_note = Note("xyz")
         self.third_test_note = Note("abc")

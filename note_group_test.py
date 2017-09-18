@@ -7,10 +7,12 @@ class TestNoteGroup(unittest.TestCase):
     #add topics and mentions to notes b - e
     #note b has topics 2 - 5, c has 3 - 5 ... e just has 5
     #note b has mentions 1 - 4, c has 2 - 4 ... e just has 4
+    #note b has keywords 0 - 3, c has 1 - 3 ... e just has 3
     for i in range(0, len(notes) - 1):
         for j in range(1, i+1):
             notes[j].add_mentions(i)
             notes[j].add_topics(i+1)
+            notes[j].add_keywords(i - 1)
     ng = NoteGroup(notes)
 
     #tests use set to verify that all elements are the same, order does not matter
@@ -29,6 +31,13 @@ class TestNoteGroup(unittest.TestCase):
         self.assertEqual(set(self.ng.with_topic(4)), set(self.notes[1:4]))
         self.assertEqual(set(self.ng.with_topic(3)), set(self.notes[1:3]))
         self.assertEqual(self.ng.with_topic(2)[0], self.notes[1])
+
+    def test_with_keyword(self):
+        self.assertEqual(set(self.ng.with_keyword(3)), set(self.notes[1:5]))
+        self.assertEqual(set(self.ng.with_keyword(2)), set(self.notes[1:4]))
+        self.assertEqual(set(self.ng.with_keyword(1)), set(self.notes[1:3]))
+        self.assertEqual(self.ng.with_keyword(0)[0], self.notes[1])
+        
 
 if __name__ == '__main__':
     unittest.main()
