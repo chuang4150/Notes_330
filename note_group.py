@@ -23,6 +23,3 @@ class NoteGroup(object):
 
     def with_topic(self, topic):
         return list(filter(lambda x: x.has_topic(topic), self.notes))
-
-    def with_keyword(self, keyword):
-        return list(filter(lambda x: x.has_keyword(keyword), self.notes))

@@ -1,3 +1,4 @@
+import sys
 class Note(object):
 
     """
@@ -8,16 +9,19 @@ class Note(object):
 
     _ids_in_use = set()
 
-    def __init__(self, unique_id):
-        self.unique_id = unique_id    #assumes presence of a unique id for every note
-        if unique_id in self._ids_in_use:
-            print("WARNING: id already in use") #left as a warning for now, probably should involve more than this
-        self._ids_in_use.add(unique_id)
+    def __init__(self, file_name):
+        self.file_name = file_name
         self.mentions = set()
         self.topics = set()
-        self.reference = None
+        self.references = set()
         self.urls = set()
-        self.keywords = set()
+
+    def create_id(self, unique_id):
+        self.unique_id = unique_id
+        if unique_id in self._ids_in_use:
+            print("WARNING: duplicate id. Program terminating.")
+            sys.exit(1)
+        self._ids_in_use.add(unique_id)
 
     def add_mentions(self, *items):
         self.mentions.update(items)
@@ -34,26 +38,20 @@ class Note(object):
     def has_topic(self, item):
         return item in self.topics
 
-    def create_reference(self, ref_id):
-        self.reference = ref_id
+    def add_references(self, *ref_id):
+        self.references.update(ref_id)
 
-    def get_reference(self):
-        return self.reference
+    def has_reference(self, ref_id):
+        return ref_id in self.references
 
     def add_urls(self, *items):
         self.urls.update(items)
 
-    def add_keywords(self, *items):
-        self.keywords.update(items)
-
-    def has_keyword(self, item):
-        return item in self.keywords
-
     def __eq__(self, other):
-        return self.unique_id == other.unique_id
+        return self.file_name == other.file_name
 
     def __str__(self):
-        return "Note " + self.unique_id
+        return self.file_name
 
     def __hash__(self):
         return hash(str(self))
