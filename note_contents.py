@@ -11,6 +11,7 @@ class Note(object):
 
     def __init__(self, file_name):
         self.file_name = file_name
+        self.unique_id = None
         self.mentions = set()
         self.topics = set()
         self.references = set()
