@@ -1,7 +1,7 @@
 # Notes_330
 
 
-The KNote file is able to report of all notes containing all mentions, organzie the notes by metion and generate keywords found within the notes.
+The KNote file is able to report of all notes containing all mentions, organize notes by metion and generate keywords found within the notes. By using the class Note from note_contents and the class note_group from the note_group file, the program is able to seperate mentions/topics/etc into sets and divide them into groups.
 
 System for organizing notes
 
