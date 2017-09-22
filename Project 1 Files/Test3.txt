@@ -1,5 +1,4 @@
 @Chris
 #Train
 !Termites
-^Wifi
 https://reddit.com/

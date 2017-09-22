@@ -2,13 +2,14 @@
 import os
 import re
 import glob
-from Note_re import Note
-from NoteGroup import NoteGroup
+from note_contents import Note
+from note_group import NoteGroup
 
 # TODO: Make pretty and have reports easier to read
-# cwd = os.getcwd()  # Get the current working directory (cwd)
+cwd = os.getcwd()  # Get the current working directory (cwd)
 # files = os.listdir(cwd)
 # print("Files in '%s': %s" % (cwd, files))
+print (cwd)
 
 class find(object):
     def __init__ (self, body, author, title):
@@ -88,6 +89,10 @@ def main():
         for note in compilation.with_topic(topic):
 
             print (note,':', topic)
+
+    print("Notes in topological order:")
+    for note in compilation.topo_sort():
+        print(note)
 
     contine_search = input("Would you like to redo the analysis?")
     if contine_search in ('y', 'yes'):
